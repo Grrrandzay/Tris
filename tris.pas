@@ -1,0 +1,6 @@
+PROGRAM tris;
+
+
+
+BEGIN
+END.
