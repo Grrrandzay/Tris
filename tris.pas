@@ -171,5 +171,6 @@ BEGIN
   Affichage(Bulle(tab));
   Affichage(Selection(tab));
   Affichage(Insertion(tab));
-  writeln('[Bulle / Selection / Insertion]')
+  Affichage(Rapide(tab,0,high(tab)));
+  writeln('[Bulle / Selection / Insertion / Rapide]');
 END.
