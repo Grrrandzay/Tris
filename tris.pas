@@ -60,6 +60,7 @@ function GenTotal(): tdyn;
 //------------------------------------------------------------------------------
 
 function Permut(var tab: tdyn; a, b: integer): tdyn;
+//a et b indices de cases.
   var x: integer;
   begin
     x := tab[a];
@@ -86,6 +87,22 @@ function Bulle(tab: tdyn): tdyn;
     Bulle := tab;
   end;
 
+//------------------------------------------------------------------------------
+
+function Selection(tab: tdyn): tdyn;
+  var i, j, t: integer;
+  begin
+    for i := 0 to high(tab) do
+    begin
+      t := i;
+      for j := i to high(tab) do
+        if tab[j]<tab[t]
+          then t := j;
+      Permut(tab,i,t);
+    end;
+    Selection := tab;
+  end;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VAR tab: tdyn;
@@ -95,4 +112,5 @@ BEGIN
   Affichage(tab);
   writeln('--------------------');
   Affichage(Bulle(tab));
+  Affichage(Selection(tab));
 END.
