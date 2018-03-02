@@ -71,6 +71,24 @@ function Permut(var tab: tdyn; a, b: integer): tdyn;
 
 //------------------------------------------------------------------------------
 
+function Partition(var tab: tdyn; g, d: integer): integer;
+  var i, p, x: integer;
+  begin
+    x := 0;
+    p := tab[d];
+    for i := g to d do
+    begin
+      if tab[i]<=p then
+      begin
+        permut(tab,x,i);
+        x := x+1;
+      end;
+    end;
+    Partition := x;
+  end;
+
+//------------------------------------------------------------------------------
+
 function Bulle(tab: tdyn): tdyn;
   var tri: boolean;
       i: integer;
