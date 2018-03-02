@@ -103,6 +103,25 @@ function Selection(tab: tdyn): tdyn;
     Selection := tab;
   end;
 
+//------------------------------------------------------------------------------
+
+function Insertion(tab: tdyn): tdyn;
+  var i, j, t: integer;
+  begin
+    for i := 1 to high(tab) do
+    begin
+      t := tab[i];
+      j := i;
+      while t<tab[j-1] do
+      begin
+        tab[j] := tab[j-1];
+        j := j-1;
+      end;
+      tab[j] := t;
+    end;
+    Insertion := tab;
+  end;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VAR tab: tdyn;
@@ -113,4 +132,6 @@ BEGIN
   writeln('--------------------');
   Affichage(Bulle(tab));
   Affichage(Selection(tab));
+  Affichage(Insertion(tab));
+  writeln('[Bulle / Selection / Insertion]')
 END.
