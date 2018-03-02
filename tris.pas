@@ -140,6 +140,26 @@ function Insertion(tab: tdyn): tdyn;
     Insertion := tab;
   end;
 
+//------------------------------------------------------------------------------
+
+function Rapide(tab: tdyn; g, d: integer): tdyn;
+  var i: integer;
+  begin
+    if g = d
+      then Rapide := tab
+      else
+      begin
+        i := Partition(tab, g, d);
+        if ((g = i-1) and (d = i+1))
+          then Rapide := tab
+        else
+        begin
+          tab := Rapide(tab,g,i-1);
+          Rapide := Rapide(tab,i+1,d);
+        end;
+      end;
+  end;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VAR tab: tdyn;
