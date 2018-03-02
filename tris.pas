@@ -93,5 +93,6 @@ VAR tab: tdyn;
 BEGIN
   tab := GenTotal;
   Affichage(tab);
+  writeln('--------------------');
   Affichage(Bulle(tab));
 END.
