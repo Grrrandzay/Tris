@@ -57,6 +57,35 @@ function GenTotal(): tdyn;
     GenTotal := tab;
   end;
 
+//------------------------------------------------------------------------------
+
+function Permut(var tab: tdyn; a, b: integer): tdyn;
+  var x: integer;
+  begin
+    x := tab[a];
+    tab[a] := tab[b];
+    tab[b] := x;
+    Permut := tab;
+  end;
+
+//------------------------------------------------------------------------------
+
+function Bulle(tab: tdyn): tdyn;
+  var tri: boolean;
+      i: integer;
+  begin
+    repeat
+      tri := true;
+      for i := 1 to high(tab) do
+        if tab[i-1]>tab[i] then
+        begin
+          Permut(tab, i-1, i);
+          tri := false;
+        end;
+    until (tri);
+    Bulle := tab;
+  end;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VAR tab: tdyn;
@@ -64,4 +93,5 @@ VAR tab: tdyn;
 BEGIN
   tab := GenTotal;
   Affichage(tab);
+  Affichage(Bulle(tab));
 END.
