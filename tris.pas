@@ -62,7 +62,6 @@ function GenTotal(): tdyn;
 //------------------------------------------------------------------------------
 
 function Permut(var tab: tdyn; a, b: integer): tdyn;
-//a et b indices de cases.
   var x: integer;
   begin
     x := tab[a];
@@ -76,7 +75,6 @@ function Permut(var tab: tdyn; a, b: integer): tdyn;
 function Partition(var tab: tdyn; g, d: integer): integer;
   var i, p, x: integer;
   begin
-    //writeln(d);
     x := g;
     p := tab[d];
     for i := g to d do
@@ -85,10 +83,8 @@ function Partition(var tab: tdyn; g, d: integer): integer;
       begin
         permut(tab,x,i);
         x := x+1;
-        //writeln(x);
       end;
     end;
-    //writeln(x);
     Partition := x-1;
   end;
 
@@ -150,19 +146,12 @@ function Insertion(tab: tdyn): tdyn;
 function Rapide(tab: tdyn; g, d: integer): tdyn;
   var i: integer;
   begin
-    delay(500);
-    Affichage(tab);
-    //writeln(g,' : ',d);
     if g >= d
       then Rapide := tab
       else
       begin
         i := Partition(tab, g, d);
-        //Affichage(tab);
-        //writeln(i);
-        //writeln('1');
         tab := Rapide(tab,g,i-1);
-        //writeln('2');
         Rapide := Rapide(tab,i+1,d);
       end;
   end;
