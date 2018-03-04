@@ -1,5 +1,7 @@
 PROGRAM tris;
 
+USES crt;
+
 TYPE
   tdyn = array of integer;
 
@@ -74,7 +76,8 @@ function Permut(var tab: tdyn; a, b: integer): tdyn;
 function Partition(var tab: tdyn; g, d: integer): integer;
   var i, p, x: integer;
   begin
-    x := 0;
+    //writeln(d);
+    x := g;
     p := tab[d];
     for i := g to d do
     begin
@@ -82,9 +85,11 @@ function Partition(var tab: tdyn; g, d: integer): integer;
       begin
         permut(tab,x,i);
         x := x+1;
+        //writeln(x);
       end;
     end;
-    Partition := x;
+    //writeln(x);
+    Partition := x-1;
   end;
 
 //------------------------------------------------------------------------------
@@ -145,18 +150,20 @@ function Insertion(tab: tdyn): tdyn;
 function Rapide(tab: tdyn; g, d: integer): tdyn;
   var i: integer;
   begin
-    if g = d
+    delay(500);
+    Affichage(tab);
+    //writeln(g,' : ',d);
+    if g >= d
       then Rapide := tab
       else
       begin
         i := Partition(tab, g, d);
-        if ((g = i-1) and (d = i+1))
-          then Rapide := tab
-        else
-        begin
-          tab := Rapide(tab,g,i-1);
-          Rapide := Rapide(tab,i+1,d);
-        end;
+        //Affichage(tab);
+        //writeln(i);
+        //writeln('1');
+        tab := Rapide(tab,g,i-1);
+        //writeln('2');
+        Rapide := Rapide(tab,i+1,d);
       end;
   end;
 
@@ -168,9 +175,9 @@ BEGIN
   tab := GenTotal;
   Affichage(tab);
   writeln('--------------------');
-  Affichage(Bulle(tab));
-  Affichage(Selection(tab));
-  Affichage(Insertion(tab));
+  //Affichage(Bulle(tab));
+  //Affichage(Selection(tab));
+  //Affichage(Insertion(tab));
   Affichage(Rapide(tab,0,high(tab)));
   writeln('[Bulle / Selection / Insertion / Rapide]');
 END.
