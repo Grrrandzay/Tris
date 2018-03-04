@@ -90,6 +90,28 @@ function Partition(var tab: tdyn; g, d: integer): integer;
 
 //------------------------------------------------------------------------------
 
+function Fusion(tab1, tab2: tdyn): tdyn;
+  var res: tdyn;
+      i, j, k: integer;
+  begin
+    setlength(res, length(tab1)+length(tab2));
+    i := 0; j := 0;
+    for k := 0 to high(res) do
+      if (((tab1[i]<=tab2[j]) and (i<=high(tab1))) or (j>high(tab2))) then
+        begin
+          res[k] := tab1[i];
+          i := i+1;
+        end
+        else
+        begin
+          res[k] := tab2[j];
+          j := j+1;
+        end;
+    Fusion := res;
+  end;
+
+//------------------------------------------------------------------------------
+
 function Bulle(tab: tdyn): tdyn;
   var tri: boolean;
       i: integer;
@@ -156,6 +178,28 @@ function Rapide(tab: tdyn; g, d: integer): tdyn;
       end;
   end;
 
+//------------------------------------------------------------------------------
+
+function TriFusion(tab: tdyn): tdyn;
+  var tabG, tabD: tdyn;
+      i, j, m: integer;
+  begin
+    if length(tab)=1
+      then TriFusion := tab
+      else
+      begin
+        m := length(tab) div 2;
+        setlength(tabG, m);
+        setlength(tabD, length(tab)-m);
+        for i := 0 to high(tabG) do
+          tabG[i] := tab[i];
+        for j := 0 to high(tabD) do
+          tabD[j] := tab[j+m];
+          writeln;
+        TriFusion := Fusion(TriFusion(tabG),TriFusion(tabD));
+      end;
+  end;
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 VAR tab: tdyn;
@@ -167,6 +211,6 @@ BEGIN
   //Affichage(Bulle(tab));
   //Affichage(Selection(tab));
   //Affichage(Insertion(tab));
-  Affichage(Rapide(tab,0,high(tab)));
-  writeln('[Bulle / Selection / Insertion / Rapide]');
+  //Affichage(Rapide(tab,0,high(tab)));
+  Affichage(TriFusion(tab));
 END.
