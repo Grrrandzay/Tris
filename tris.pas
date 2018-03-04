@@ -210,7 +210,7 @@ BEGIN
   writeln('--------------------');
   //Affichage(Bulle(tab));
   //Affichage(Selection(tab));
-  //Affichage(Insertion(tab));
+  Affichage(Insertion(tab));
   //Affichage(Rapide(tab,0,high(tab)));
-  Affichage(TriFusion(tab));
+  //Affichage(TriFusion(tab));
 END.
